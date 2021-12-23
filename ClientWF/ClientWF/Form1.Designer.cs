@@ -49,9 +49,7 @@ namespace ClientWF
       this.panel2.SuspendLayout();
       this.panel3.SuspendLayout();
       this.SuspendLayout();
-            // 
-            // button1
-            // 
+
       this.button1.Location = new System.Drawing.Point(703, 386);
       this.button1.Name = "button1";
       this.button1.Size = new System.Drawing.Size(94, 29);
