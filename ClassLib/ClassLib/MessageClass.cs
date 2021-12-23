@@ -12,8 +12,7 @@ namespace ClassLib
 
     public override string ToString()
     {
-
-      return $"{timeStamp} - {userName} : {messageText}";
+    return $"{timeStamp} - {userName} : {messageText}";
     }
   }
 }
