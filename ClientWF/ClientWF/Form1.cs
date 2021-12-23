@@ -1,4 +1,4 @@
-using ClassLib;
+﻿using ClassLib;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -28,7 +28,6 @@ namespace ClientWF
       InitializeComponent();
     }
 
-
     private bool check_allow_server(string ip, int port)
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -54,10 +53,6 @@ namespace ClientWF
 
         }
 
-    private void button2_Click(object sender, EventArgs e)
-    {
-
-    }
         private string  drawEmoji(string str1)
         {
             int i = 0;
@@ -91,28 +86,25 @@ namespace ClientWF
         }
     private void timer1_Tick(object sender, EventArgs e)
     {
-      string res = "";
-      if (check_allow_server("127.0.0.1", 5000))
+    string res = "";
+    if (check_allow_server("127.0.0.1", 5000))
+        {
+        while (res != "Not found")
             {
-
-           // обновление сообщений 
-          while (res != "Not found")
-          {
             var client = new RestClient(baseUrl);
             var request = new RestRequest("api/GetMessage/" + pos, Method.GET);
             var queryResult = client.Execute(request);
             res = queryResult.Content;
             res = res.Trim('\"');
             if (res != "Not found")
-            {
-              res= drawEmoji(res);
-              listBox1.Items.Add(res);
-              pos++;
+                {
+                res= drawEmoji(res);
+                listBox1.Items.Add(res);
+                pos++;
+                }
             }
-          }
-
         }
-  }
+    }
 
     private void button1_Click(object sender, EventArgs e)
     {
@@ -127,71 +119,70 @@ namespace ClientWF
       request.AddBody(mes);
       client.Execute(request);
     }
-        private void button2_Click_1(object sender, EventArgs e)
+    private void button2_Click_1(object sender, EventArgs e)
         {
-            string url = baseUrl + "/api/login";
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
-            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+        string url = baseUrl + "/api/login";
+        var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+        httpWebRequest.ContentType = "application/json";
+        httpWebRequest.Method = "POST";
+        using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
-                LoginClass lg = new LoginClass();
-                lg.login = loginTB.Text.ToLower();
-                lg.password = CryptClass.GetSHA256(passwordTB.Text);
-                string jsonString = JsonConvert.SerializeObject(lg, Formatting.Indented);
-                streamWriter.Write(jsonString);
+            LoginClass lg = new LoginClass();
+            lg.login = loginTB.Text.ToLower();
+            lg.password = CryptClass.GetSHA256(passwordTB.Text);
+            string jsonString = JsonConvert.SerializeObject(lg, Formatting.Indented);
+            streamWriter.Write(jsonString);
             }
 
-            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            string strdata = "";
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+        var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+        string strdata = "";
+        using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
-                strdata = streamReader.ReadToEnd();
+            strdata = streamReader.ReadToEnd();
             }
 
-            token = strdata;
+        token = strdata;
 
-            //getLoginByToken
-            string url2 = baseUrl + "/api/getLoginByToken";
-            var httpWebRequest2 = (HttpWebRequest)WebRequest.Create(url2);
-            httpWebRequest2.ContentType = "application/json";
-            httpWebRequest2.Method = "POST";
-            using (var streamWriter = new StreamWriter(httpWebRequest2.GetRequestStream()))
+        string url2 = baseUrl + "/api/getLoginByToken";
+        var httpWebRequest2 = (HttpWebRequest)WebRequest.Create(url2);
+        httpWebRequest2.ContentType = "application/json";
+        httpWebRequest2.Method = "POST";
+        using (var streamWriter = new StreamWriter(httpWebRequest2.GetRequestStream()))
             {
-                streamWriter.Write("\""+token+ "\"");
+            streamWriter.Write("\""+token+ "\"");
             }
 
-            var httpResponse2 = (HttpWebResponse)httpWebRequest2.GetResponse();
-            string strdata2 = "";
-            using (var streamReader = new StreamReader(httpResponse2.GetResponseStream()))
+        var httpResponse2 = (HttpWebResponse)httpWebRequest2.GetResponse();
+        string strdata2 = "";
+        using (var streamReader = new StreamReader(httpResponse2.GetResponseStream()))
             {
-                strdata2 = streamReader.ReadToEnd();
+            strdata2 = streamReader.ReadToEnd();
             }
-            textBox1.Text = strdata2;
+        textBox1.Text = strdata2;
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {
+            {
             string url = baseUrl + "/api/reg";
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            {
+                {
                 LoginClass lg = new LoginClass();
                 lg.login = loginTB.Text.ToLower();
                 lg.password = CryptClass.GetSHA256(passwordTB.Text);
                 string jsonString = JsonConvert.SerializeObject(lg, Formatting.Indented);
                 streamWriter.Write(jsonString);
-            }
+                }
 
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             string strdata = "";
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
+                {
                 strdata = streamReader.ReadToEnd();
+                }
             }
-        }
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
@@ -202,10 +193,8 @@ namespace ClientWF
             }
             
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
     }
 }
