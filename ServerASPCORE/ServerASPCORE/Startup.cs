@@ -26,7 +26,7 @@ namespace ServerASPCORE
       {
       services.AddControllers();
       services.AddSwaggerGen(c =>{c.SwaggerDoc("v1", new OpenApiInfo { Title = "ServerASPCORE", Version = "v1" });});
-    }
+      }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
       {
