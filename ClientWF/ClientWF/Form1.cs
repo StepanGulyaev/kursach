@@ -54,6 +54,10 @@ namespace ClientWF
 
         }
 
+    private void button2_Click(object sender, EventArgs e)
+    {
+
+    }
         private string  drawEmoji(string str1)
         {
             int i = 0;
@@ -162,6 +166,7 @@ namespace ClientWF
 
             token = strdata;
 
+            //getLoginByToken
             string url2 = baseUrl + "/api/getLoginByToken";
             var httpWebRequest2 = (HttpWebRequest)WebRequest.Create(url2);
             httpWebRequest2.ContentType = "application/json";
@@ -202,6 +207,71 @@ namespace ClientWF
                 strdata = streamReader.ReadToEnd();
             }
         }
+
+        private void listBox1_DoubleClick(object sender, EventArgs e)
+        {
+            int index = listBox1.SelectedIndex;
+            if (index > 0)
+            {
+                textBox2.Text= "цитата: ^"+listBox1.Items[index].ToString()+"^";
+            }
+            
+        }
+
+        private void checkBox1_CheckStateChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            //if (checkBox1.Checked)
+            //{
+            //    MessageBox.Show("Bla");
+            //}
+
+
+        }
+
+        private void checkBox1_CheckStateChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                this.BackColor = Color.Black;
+            }
+            else
+            {
+                this.BackColor = Color.White;
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            textBox2.Text+= "👍";
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox2_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int ind = listBox2.SelectedIndex;
+            if (ind >= 0)
+            {
+                textBox2.Text ="@" + contacts[ind] + ":";
+            }
+        }
     }
 }
-
