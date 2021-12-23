@@ -110,23 +110,8 @@ namespace ClientWF
               pos++;
             }
           }
-                // обновление контактов
-                var client_c = new RestClient(baseUrl);
-                var request_c = new RestRequest("api/contacts/", Method.GET);
-                var queryResult_c = client_c.Execute(request_c);
-                res = queryResult_c.Content;
-                res = res.Trim('\"');
-                res = res.Replace("\\","");
-                List<string> newcontacts = new List<string>();
-                newcontacts = JsonConvert.DeserializeObject<List<string>>(res);
-                if (newcontacts != contacts) 
-                { 
-                    contacts = newcontacts;
-                    listBox2.Items.Clear();
-                    foreach (var contact in newcontacts)
-                         listBox2.Items.Add(contact);
-                }
-            }
+
+        }
   }
 
     private void button1_Click(object sender, EventArgs e)
@@ -218,60 +203,9 @@ namespace ClientWF
             
         }
 
-        private void checkBox1_CheckStateChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            //if (checkBox1.Checked)
-            //{
-            //    MessageBox.Show("Bla");
-            //}
-
-
-        }
-
-        private void checkBox1_CheckStateChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-            {
-                this.BackColor = Color.Black;
-            }
-            else
-            {
-                this.BackColor = Color.White;
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            textBox2.Text+= "👍";
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox2_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            int ind = listBox2.SelectedIndex;
-            if (ind >= 0)
-            {
-                textBox2.Text ="@" + contacts[ind] + ":";
-            }
         }
     }
 }
