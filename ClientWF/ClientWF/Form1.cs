@@ -16,32 +16,32 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ClientWF
-{
-  public partial class Form1 : Form
-  {
-    public int pos = 0;
-    public string baseUrl = "http://localhost:5000";
-    public string token;
-    public List<string> contacts = new List<string>();
-    public Form1()
     {
-      InitializeComponent();
-    }
+    public partial class Form1 : Form
+        {
+        public int pos = 0;
+        public string baseUrl = "http://localhost:5000";
+        public string token;
+        public List<string> contacts = new List<string>();
+        public Form1()
+            {
+            InitializeComponent();
+            }
 
     private bool check_allow_server(string ip, int port)
         {
-            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPEndPoint point = new IPEndPoint(IPAddress.Parse(ip), port);
-            try
+        Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        IPEndPoint point = new IPEndPoint(IPAddress.Parse(ip), port);
+        try
             {
-                socket.Connect(point);
-                return true;
+            socket.Connect(point);
+            return true;
             }
-            catch (SocketException e)
+        catch (SocketException e)
             {
-                if (e.ErrorCode == 10061)
-                    return false;
-                else 
+            if (e.ErrorCode == 10061)
+                return false;
+            else 
                 if (e.ErrorCode == 10060)
                     return false;
                 //    Console.WriteLine("TimeOut"); 
@@ -50,75 +50,73 @@ namespace ClientWF
                 //Console.WriteLine(e.Message);
             }
             return false;
-
         }
 
-        private string  drawEmoji(string str1)
+    private string  drawEmoji(string str1)
         {
-            int i = 0;
-            string str2 = "";
-            while(i<str1.Length)
+        int i = 0;
+        string str2 = "";
+        while(i<str1.Length)
             {
-                if (str1[i] == '\\') 
+            if (str1[i] == '\\') 
                 {
-                    string tmp = "\\";
-                    int j = i + 1;
-                    while ((j < str1.Length) && (str1[j] != ' '))
+                string tmp = "\\";
+                int j = i + 1;
+                while ((j < str1.Length) && (str1[j] != ' '))
                     {
-                        tmp += str1[j];
-                        j++;
+                    tmp += str1[j];
+                    j++;
                     }
-                    tmp = tmp.Replace("\\u", "");
-                    var personWithBlondHair = ""
-                        + (char)int.Parse(tmp.Substring(0, 4), NumberStyles.HexNumber)
-                        + (char)int.Parse(tmp.Substring(4, 4), NumberStyles.HexNumber);
-
-                    str2 += personWithBlondHair;
-                    i = j;
+                tmp = tmp.Replace("\\u", "");
+                var personWithBlondHair = ""
+                + (char)int.Parse(tmp.Substring(0, 4), NumberStyles.HexNumber)
+                + (char)int.Parse(tmp.Substring(4, 4), NumberStyles.HexNumber);
+                str2 += personWithBlondHair;
+                i = j;
                 }
-                else
+            else
                 {
-                    str2 += str1[i];
+                str2 += str1[i];
                 }
-                i++;    
+            i++;    
             }
             return str2;
         }
     private void timer1_Tick(object sender, EventArgs e)
-    {
-    string res = "";
-    if (check_allow_server("127.0.0.1", 5000))
         {
-        while (res != "Not found")
+        string res = "";
+        if (check_allow_server("127.0.0.1", 5000))
             {
-            var client = new RestClient(baseUrl);
-            var request = new RestRequest("api/GetMessage/" + pos, Method.GET);
-            var queryResult = client.Execute(request);
-            res = queryResult.Content;
-            res = res.Trim('\"');
-            if (res != "Not found")
+            while (res != "Not found")
                 {
-                res= drawEmoji(res);
-                listBox1.Items.Add(res);
-                pos++;
+                var client = new RestClient(baseUrl);
+                var request = new RestRequest("api/GetMessage/" + pos, Method.GET);
+                var queryResult = client.Execute(request);
+                res = queryResult.Content;
+                res = res.Trim('\"');
+                if (res != "Not found")
+                    {
+                    res= drawEmoji(res);
+                    listBox1.Items.Add(res);
+                    pos++;
+                    }
                 }
             }
         }
-    }
 
     private void button1_Click(object sender, EventArgs e)
-    {
-      var client = new RestClient(baseUrl);
-      var request = new RestRequest("api/sendmessage", Method.POST);
-      request.RequestFormat = DataFormat.Json;
-      ClassLib.MessageClass mes = new ClassLib.MessageClass();
-      mes.userName = textBox1.Text;
-      mes.messageText = textBox2.Text;
-      mes.timeStamp = DateTime.Now.ToString();
-      mes.token = token;
-      request.AddBody(mes);
-      client.Execute(request);
-    }
+        {
+        var client = new RestClient(baseUrl);
+        var request = new RestRequest("api/sendmessage", Method.POST);
+        request.RequestFormat = DataFormat.Json;
+        ClassLib.MessageClass mes = new ClassLib.MessageClass();
+        mes.userName = textBox1.Text;
+        mes.messageText = textBox2.Text;
+        mes.timeStamp = DateTime.Now.ToString();
+        mes.token = token;
+        request.AddBody(mes);
+        client.Execute(request);
+        }
     private void button2_Click_1(object sender, EventArgs e)
         {
         string url = baseUrl + "/api/login";
@@ -161,39 +159,38 @@ namespace ClientWF
         textBox1.Text = strdata2;
         }
 
-        private void button3_Click(object sender, EventArgs e)
-            {
-            string url = baseUrl + "/api/reg";
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
-            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-                {
-                LoginClass lg = new LoginClass();
-                lg.login = loginTB.Text.ToLower();
-                lg.password = CryptClass.GetSHA256(passwordTB.Text);
-                string jsonString = JsonConvert.SerializeObject(lg, Formatting.Indented);
-                streamWriter.Write(jsonString);
-                }
-
-            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            string strdata = "";
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                {
-                strdata = streamReader.ReadToEnd();
-                }
-            }
-
-        private void listBox1_DoubleClick(object sender, EventArgs e)
+    private void button3_Click(object sender, EventArgs e)
         {
-            int index = listBox1.SelectedIndex;
-            if (index > 0)
+        string url = baseUrl + "/api/reg";
+        var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+        httpWebRequest.ContentType = "application/json";
+        httpWebRequest.Method = "POST";
+        using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
-                textBox2.Text= "цитата: ^"+listBox1.Items[index].ToString()+"^";
+            LoginClass lg = new LoginClass();
+            lg.login = loginTB.Text.ToLower();
+            lg.password = CryptClass.GetSHA256(passwordTB.Text);
+            string jsonString = JsonConvert.SerializeObject(lg, Formatting.Indented);
+            streamWriter.Write(jsonString);
             }
-            
+
+        var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+        string strdata = "";
+        using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+            strdata = streamReader.ReadToEnd();
+            }
         }
-        private void Form1_Load(object sender, EventArgs e)
+
+    private void listBox1_DoubleClick(object sender, EventArgs e)
+        {
+        int index = listBox1.SelectedIndex;
+        if (index > 0)
+            {
+            textBox2.Text= "цитата: ^"+listBox1.Items[index].ToString()+"^";
+            }
+        }
+    private void Form1_Load(object sender, EventArgs e)
         {
         }
     }
