@@ -39,19 +39,13 @@ namespace ClientWF
             this.loginTB = new System.Windows.Forms.TextBox();
             this.passwordTB = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            this.listBox2 = new System.Windows.Forms.ListBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -92,7 +86,7 @@ namespace ClientWF
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(668, 25);
             this.textBox2.TabIndex = 4;
-            this.textBox2.Text = "Развития и сил Вам ребята;)";
+            this.textBox2.Text = "Привет!";
             // 
             // timer1
             // 
@@ -116,7 +110,7 @@ namespace ClientWF
             this.loginTB.Name = "loginTB";
             this.loginTB.Size = new System.Drawing.Size(192, 27);
             this.loginTB.TabIndex = 6;
-            this.loginTB.Text = "rusal";
+            this.loginTB.Text = "GulyaevStepan";
             // 
             // passwordTB
             // 
@@ -124,7 +118,7 @@ namespace ClientWF
             this.passwordTB.Name = "passwordTB";
             this.passwordTB.Size = new System.Drawing.Size(192, 27);
             this.passwordTB.TabIndex = 7;
-            this.passwordTB.Text = "1234";
+            this.passwordTB.Text = "sus";
             // 
             // button3
             // 
@@ -136,47 +130,6 @@ namespace ClientWF
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(146, 430);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(120, 24);
-            this.checkBox1.TabIndex = 9;
-            this.checkBox1.Text = "Темная тема";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
-            this.checkBox1.CheckStateChanged += new System.EventHandler(this.checkBox1_CheckStateChanged_1);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(8, 6);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(31, 29);
-            this.button4.TabIndex = 10;
-            this.button4.Text = "👍";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(45, 6);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(31, 29);
-            this.button5.TabIndex = 11;
-            this.button5.Text = "😂";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(82, 6);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(31, 29);
-            this.button6.TabIndex = 12;
-            this.button6.Text = "😊";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // panel1
             // 
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
@@ -218,9 +171,6 @@ namespace ClientWF
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.button4);
-            this.panel2.Controls.Add(this.button5);
-            this.panel2.Controls.Add(this.button6);
             this.panel2.Location = new System.Drawing.Point(13, 421);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(127, 41);
@@ -235,35 +185,16 @@ namespace ClientWF
             this.label4.TabIndex = 16;
             this.label4.Text = "Вы вошли как:";
             // 
-            // listBox2
-            // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 20;
-            this.listBox2.Location = new System.Drawing.Point(14, 33);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(204, 104);
-            this.listBox2.TabIndex = 17;
-            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
-            this.listBox2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox2_MouseDoubleClick);
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.label5);
-            this.panel3.Controls.Add(this.listBox2);
             this.panel3.Location = new System.Drawing.Point(424, 474);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(228, 143);
             this.panel3.TabIndex = 18;
             // 
             // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 7);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(135, 20);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Список контактов:";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -274,7 +205,6 @@ namespace ClientWF
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.listBox1);
@@ -304,18 +234,13 @@ namespace ClientWF
         private System.Windows.Forms.TextBox passwordTB;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label5;
     }
 }
 
