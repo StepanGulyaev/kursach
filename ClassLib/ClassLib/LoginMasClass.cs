@@ -18,7 +18,7 @@ namespace ClassLib
             LoginsFileName = _loginsFileName;
             }
         /// <summary>
-        /// Добавление новых логинов и паролей в файл
+
         /// </summary>
         /// <param name="lg"></param>
         /// <param name="token"></param>
@@ -62,15 +62,14 @@ namespace ClassLib
             return "";
             }
         /// <summary>
-        /// Регистрация нового пользователя
+
         /// </summary>
         /// <param name="_login"></param>
         /// <param name="_password"></param>
         /// <returns></returns>
         public string RegUser(string _login, string _password)
             {
-            LoginClass lg = new LoginClass(_login.ToLower(),
-                                            _password);  //! уже в SHA256
+            LoginClass lg = new LoginClass(_login.ToLower(), _password);  
             if (AddUser(lg, out string token))
                 {
                 SaveLogins();
@@ -78,7 +77,6 @@ namespace ClassLib
                 }
             else
                 return "";
-
             }
         public string getLoginByToken(string _token)
             {
@@ -90,7 +88,7 @@ namespace ClassLib
             return "";
             }
         /// <summary>
-        /// Функция загружает логины и пароли из файла
+
         /// </summary>
         public void LoadLogins()
             {
@@ -101,7 +99,7 @@ namespace ClassLib
                 }
             }
         /// <summary>
-        /// Функция сохраняет логины и пароли в файл
+
         /// </summary>
         public void SaveLogins()
             {
@@ -109,7 +107,7 @@ namespace ClassLib
             File.WriteAllText(LoginsFileName, jsonString);
             }
         /// <summary>
-        /// Обновить токен
+
         /// </summary>
         /// <param name="oldToken"></param>
         /// <returns></returns>
@@ -132,7 +130,7 @@ namespace ClassLib
             return contacts;
             }
         /// <summary>
-        /// Вывод логинов и паролей на экран
+
         /// </summary>
         /// <returns></returns>
         public override string ToString()
